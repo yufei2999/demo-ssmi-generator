@@ -28,7 +28,7 @@ public class ${className}DaoImpl extends BaseDao<${className},${table.idColumn.j
         return super.findAll();
     }
     public ${className} getById(${table.idColumn.javaType} id) {
-        return super.getById( id);
+        return super.getById(id);
     }
     public ${className} getObject(${className}Query query) {
         return (${className})getSqlSession().selectOne("${className}.findPage",query);
