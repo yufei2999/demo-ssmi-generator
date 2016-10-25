@@ -17,6 +17,7 @@ public class ${className}Action {
     /**
      * 列表
      */
+    @RequestMapping(value = "/list")
     public String list() {
         return "${jspFileBasePath}/list";
     }
@@ -47,7 +48,6 @@ public class ${className}Action {
      *
      * @return
      */
-    @ResponseBody
     @RequestMapping(value = "/show")
     public String show() {
         return "${jspFileBasePath}/show";
@@ -58,7 +58,6 @@ public class ${className}Action {
      *
      * @return
      */
-    @ResponseBody
     @RequestMapping(value = "/create")
     public String create() {
         return "${jspFileBasePath}/create";
@@ -93,7 +92,6 @@ public class ${className}Action {
      *
      * @return
      */
-    @ResponseBody
     @RequestMapping(value = "/edit")
     public String edit() {
         return "${jspFileBasePath}/edit";

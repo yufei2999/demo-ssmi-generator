@@ -5,6 +5,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="${className}">
+
     <resultMap id="${className}Map" type="${basepackage}.model.${className}">
         <#list table.columns as column>
         <result property="${column.columnNameLower}" column="${column.sqlName}"/>
@@ -81,7 +82,7 @@
 			       	<#list table.columns as column>
 				   	<#if column.isStringColumn && !column.pk>
 				    <if test="@Ognl@isNotEmpty(${column.columnNameLower})">
-			   			AND ${column.sqlName} LIKE  <![CDATA['%${r"$"}${r"{"}${column.columnNameLower}${r"}"}%' ]]>
+			   			AND ${column.sqlName} LIKE CONCAT('%', #${r"{"}${column.columnNameLower}${r"}"},'%')
 			   		</if>
 				   	</#if>
 			       	</#list>
@@ -107,10 +108,13 @@
 	</sql>
 	 
     <select id="findPageCount" resultType="long">
-        SELECT count(*) FROM ${table.sqlName} <include refid="findWhere"/>    
+        SELECT count(*) FROM ${table.sqlName} <include refid="findWhere"/>
     </select>
-    
-    <!-- findPage -->
+
+	<!--
+        Paging query has been using Dialect for paging, you can not use Dialect directly to write the page
+        Because the paging query will pass #offset#, #pageSize#, #lastRows# three parameters, the different database can be based on the three parameters of the application of different attributes to achieve
+    -->
     <select id="findPage" resultMap="${className}Map">
     	SELECT <include refid="columns"/> FROM ${table.sqlName} 
 		<include refid="findWhere"/>
@@ -118,8 +122,20 @@
 			ORDER BY $${r"{"}sortColumns${r"}"}
 		</if>
     </select>
+
+    <#list table.columns as column>
+    <#if column.unique && !column.pk>
+    <select id="getBy${column.columnName}" resultMap="${className}Map" >
+	    SELECT <include refid="columns"/>
+	    <![CDATA[
+	        FROM ${table.sqlName} WHERE ${column.sqlName} = #${column.columnNameLower}#
+	    ]]>
+    </select>
+    
+    </#if>
+	</#list>
 	
-	<select id="findAll" resultMap="${className}Map">
+	<select id="find" resultMap="${className}Map">
 	    SELECT <include refid="columns"/> FROM ${table.sqlName} 
 		<include refid="findWhere"/>
 		<if test="@Ognl@isNotEmpty(sortColumns)">

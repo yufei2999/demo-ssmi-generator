@@ -10,7 +10,7 @@
 	<entry key="basepackage">com.yufei.sys</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
-	<entry key="namespace">pages/sys</entry>
+	<entry key="namespace">sys</entry>
 
 	<entry key="outRoot">E:\generator-output</entry>
 
