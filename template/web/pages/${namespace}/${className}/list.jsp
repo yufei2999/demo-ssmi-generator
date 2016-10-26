@@ -135,17 +135,17 @@
 			scrollbarSize:18,//滚动条宽度（当滚动条是垂直的时候）或者滚动条的高度（当滚动条是水平的时候）。
 			columns:[[
 				{field:'ck',checkbox:true}
-				<#list table.columns as column>
-					<#if column.htmlHidden>
-						,{field:'${column.columnNameLower}',title:'<%=${className}.ALIAS_${column.constantName}%>',width:120,sortable:true}
+			<#list table.columns as column>
+				<#if column.htmlHidden>
+					,{field:'${column.columnNameLower}',title:'<%=${className}.ALIAS_${column.constantName}%>',width:120,sortable:true}
+				<#else>
+					<#if column.isDateTimeColumn>
+					,{field:'${column.columnNameLower}String',title:'<%=${className}.ALIAS_${column.constantName}%>',width:120,sortable:true}
 					<#else>
-						<#if column.isDateTimeColumn>
-						,{field:'${column.columnNameLower}String',title:'<%=${className}.ALIAS_${column.constantName}%>',width:120,sortable:true}
-						<#else>
-						,{field:'${column.columnNameLower}',title:'<%=${className}.ALIAS_${column.constantName}%>',width:120,sortable:true}
-						</#if>
+					,{field:'${column.columnNameLower}',title:'<%=${className}.ALIAS_${column.constantName}%>',width:120,sortable:true}
 					</#if>
-				</#list>
+				</#if>
+			</#list>
 			]],
 			pagination:true,//设置为 true，则在数据网格（datagrid）底部显示分页工具栏
 			pageList:[10,20,50,100,200],
