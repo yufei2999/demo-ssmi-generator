@@ -25,7 +25,7 @@
                     var result = $.parseJSON(data);
                     if (result.code == "0000") {
                         $.messager.alert('提示', "操作成功！", 'info', function () {
-                            window.location.href = "<@jspEl 'ctx'/>${classNameLower}/list";
+                            window.location.href = "<@jspEl 'ctx'/>/${classNameLower}/list";
                         });
                     } else {
                         $.messager.alert('提示', result.message, 'info');
@@ -37,9 +37,7 @@
             $('#ff').form('clear');
         }
         function goBack() {
-            window.location = '<@jspEl '
-            ctx
-            '/>${classNameLower}/list';
+            window.location = '<@jspEl 'ctx'/>/${classNameLower}/list';
         }
     </script>
 </head>
@@ -50,7 +48,7 @@
 <div style="margin:20px 0;"></div>
 <div class="easyui-panel" title="信息保存" style="width:600px">
     <div style="padding:10px 60px 20px 60px">
-        <form id="ff" action="<@jspEl 'ctx'/>${classNameLower}/save" method="post" class="easyui-form" data-options="novalidate:true">
+        <form id="ff" action="<@jspEl 'ctx'/>/${classNameLower}/save" method="post" class="easyui-form" data-options="novalidate:true">
     <#list table.columns as column>
         <#if column.htmlHidden>
             <input type="hidden" id="${column.columnNameLower}" name="${column.columnNameLower}" value="<@jspEl 'model.'+column.columnNameLower/>"/>
