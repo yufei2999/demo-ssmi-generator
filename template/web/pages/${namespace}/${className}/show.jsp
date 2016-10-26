@@ -29,7 +29,6 @@
 <div style="margin:20px 0;"></div>
 <div class="easyui-panel" title="信息详情" style="width:600px">
 	<div style="padding:10px 60px 20px 60px">
-		<form id="ff" action="<@jspEl 'ctx'/>/${classNameLower}/update" method="post" class="easyui-form" data-options="novalidate:true">
 	<#list table.columns as column>
 		<#if column.htmlHidden>
 			<input type="hidden" id="${column.columnNameLower}" name="${column.columnNameLower}" value="<@jspEl 'model.'+column.columnNameLower/>"/>
@@ -55,7 +54,6 @@
 		</#if>
 	</#list>
 		</table>
-		</form>
 		<div style="text-align:center;padding:20px">
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px" onclick="goBack()">返回</a>
 		</div>
