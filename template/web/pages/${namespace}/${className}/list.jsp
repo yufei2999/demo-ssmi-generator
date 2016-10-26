@@ -17,7 +17,7 @@
 
 <body>
 <div style="width:1200px;padding:0px;">
-<form id="queryForm" name="queryForm" action="<c:url value="${actionBasePath}/listAjax.do"/>" method="post" style="display: inline;">
+<form id="queryForm" name="queryForm" action="<c:url value="${actionBasePath}/listAjax"/>" method="post" style="display: inline;">
 	<input type="hidden" id="pageNumber" name="pageNumber" value="1"/>
 	<input type="hidden" id="pageSize" name="pageSize" value="10" />
 	<input type="hidden" id="order" name="order" value="" />
@@ -68,16 +68,16 @@
 	function show(){
 		var selected = $('#userDataGrid').datagrid('getSelected');
 		if (selected){
-			location.href="<@jspEl 'ctx'/>${actionBasePath}/show.do?<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>="+selected.<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>;
+			location.href="<@jspEl 'ctx'/>${classNameLower}/show?<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>="+selected.<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>;
 		}
 	}
 	function add(){
-		location.href="<@jspEl 'ctx'/>${actionBasePath}/create.do";
+		location.href="<@jspEl 'ctx'/>${classNameLower}/create";
 	}
 	function edit(){
 		var selected = $('#userDataGrid').datagrid('getSelected');
 		if (selected){
-			location.href="<@jspEl 'ctx'/>${actionBasePath}/edit.do?<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>="
+			location.href="<@jspEl 'ctx'/>${classNameLower}/edit?<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>="
 			+selected.<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>;
 		}
 	}
@@ -94,7 +94,7 @@
 			if(rows!=null&&rows.length>0){
 				$.each(rows,function(i,n){ids.push(n.${table.idColumn.columnNameLower})
 				});
-				$.post( "<@jspEl 'ctx'/>${actionBasePath}/delete.do", {"items":ids.join(',')}, 
+				$.post( "<@jspEl 'ctx'/>${classNameLower}/delete", {"items":ids.join(',')}, 
 						function(data){
 							var result = $.parseJSON(data);  
 							if(result.code=="0000"){
@@ -122,7 +122,7 @@
 			autoRowHeight:false,//定义是否设置基于该行内容的行高度。设置为 false，则可以提高加载性能。
 			striped: true,//设置为 true，则把行条纹化。（即奇偶行使用不同背景色）
 			collapsible:true,
-			url: "<@jspEl 'ctx'/>${actionBasePath}/listAjax.do",//从远程站点请求数据的 URL          
+			url: "<@jspEl 'ctx'/>${classNameLower}/listAjax",//从远程站点请求数据的 URL          
 			loadMsg:"正在努力加载数据...",
 			remoteSort: false,
 			idField:<#list table.columns as column><#if column.pk>'${column.columnNameLower}'</#if></#list>,//指示哪个字段是标识字段。

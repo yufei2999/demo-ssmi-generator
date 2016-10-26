@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="<@jspEl 'ctx'/>/static/js/locale/easyui-lang-zh_CN.js"></script>
 	<script>
 		function goBack(){
-			window.location='<@jspEl 'ctx'/>${actionBasePath}/list.${actionExtension}';
+			window.location='<@jspEl 'ctx'/>${classNameLower}/list';
 		}
 	</script>
 </head>
@@ -29,7 +29,7 @@
 <div style="margin:20px 0;"></div>
 <div class="easyui-panel" title="信息详情" style="width:600px">
 	<div style="padding:10px 60px 20px 60px">
-		<form id="ff" action="<@jspEl 'ctx'/>${actionBasePath}/update.${actionExtension}" method="post" class="easyui-form" data-options="novalidate:true">
+		<form id="ff" action="<@jspEl 'ctx'/>${classNameLower}/update" method="post" class="easyui-form" data-options="novalidate:true">
 	<#list table.columns as column>
 		<#if column.htmlHidden>
 			<input type="hidden" id="${column.columnNameLower}" name="${column.columnNameLower}" value="<@jspEl 'model.'+column.columnNameLower/>"/>
