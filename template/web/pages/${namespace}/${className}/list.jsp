@@ -94,18 +94,22 @@
 			if(rows!=null&&rows.length>0){
 				$.each(rows,function(i,n){ids.push(n.${table.idColumn.columnNameLower})
 				});
-				$.post( "<@jspEl 'ctx'/>/${classNameLower}/delete", {"items":ids.join(',')},
-						function(data){
-							var result = $.parseJSON(data);  
-							if(result.code=="0000"){
-								$.messager.alert('提示', "操作成功！", 'info',function(){
-									$('#queryForm').submit();
-								});
-							}else{
-								$.messager.alert('提示', result.message, 'info');
-							}
+				$.ajax({
+					url : "<@jspEl 'ctx'/>/${classNameLower}/delete",
+					type : "get",
+					data : {"ids":ids},
+					traditional : true,
+					success : function(data){
+						var result = $.parseJSON(data);
+						if(result.code=="0000"){
+							$.messager.alert('提示', "操作成功！", 'info',function(){
+								$('#queryForm').submit();
+							});
+						}else{
+							$.messager.alert('提示', result.message, 'info');
 						}
-				);
+					}
+				});
 			}else{
 				$.message.alert("请选择后进行删除操作！","warning");
 			}
