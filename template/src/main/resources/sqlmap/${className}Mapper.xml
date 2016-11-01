@@ -47,12 +47,10 @@
     </update>
 
     <delete id="delete">
-    <![CDATA[
-        DELETE FROM ${table.sqlName} WHERE
-        <#list table.compositeIdColumns as column>
-        ${column.sqlName} = #${r"{"}${column.columnNameLower}${r"}"}<#if column_has_next>, </#if>
-		</#list>
-    ]]>
+        DELETE FROM ${table.sqlName} WHERE id IN
+		<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
     </delete>
     
     <select id="getById" resultMap="${className}Map">

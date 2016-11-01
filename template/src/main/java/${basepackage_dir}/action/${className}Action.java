@@ -82,7 +82,7 @@ public class ${className}Action {
             } else {
                 result.setMessage("${className}保存异常！");
             }
-            logger.error(result.getMessage(),e);
+            logger.error(result.getMessage(), e);
         }
         return JsonUtil.toJSONString(result);
     }
@@ -131,7 +131,7 @@ public class ${className}Action {
     public String delete(HttpServletRequest request) {
         AjaxResult result = new AjaxResult();
         try {
-            String[] ids = request.getParameterValues("id");
+            String[] ids = request.getParameterValues("ids");
             if (ArrayUtils.isNotEmpty(ids)) {
                 sysUserService.removeByIds(Arrays.asList(ids));
             }
