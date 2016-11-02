@@ -62,59 +62,70 @@
 
 <script type="text/javascript">
 
-	function queryList(){
+	function queryList() {
  		$("#queryForm").submit();
 	}
-	function show(){
+	function show() {
 		var selected = $('#userDataGrid').datagrid('getSelected');
 		if (selected){
 			location.href="<@jspEl 'ctx'/>/${classNameLower}/show?<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>="+selected.<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>;
 		}
 	}
-	function add(){
+	function add() {
 		location.href="<@jspEl 'ctx'/>/${classNameLower}/create";
 	}
-	function edit(){
+	function edit() {
 		var selected = $('#userDataGrid').datagrid('getSelected');
 		if (selected){
 			location.href="<@jspEl 'ctx'/>/${classNameLower}/edit?<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>="
 			+selected.<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>;
 		}
 	}
-	function del(){
+	// 删除当前行
+	function deleteItem(id) {
+		$.messager.confirm('确认', "确定要删除吗？" ,function(){
+			var ids = [];
+			ids.push(id);
+			deleteOpt(ids);
+		});
+	}
+	// 批量删除
+	function del() {
 		$.messager.confirm('确认', "确定要删除吗？" ,v_deleteItems);
 	}
-	
-
 	/**用于回调*/
-	function v_deleteItems(result){
+	function v_deleteItems(result) {
 		if (result){
 			var rows = $('#userDataGrid').datagrid('getSelections');
 			var ids = [];
 			if(rows!=null&&rows.length>0){
 				$.each(rows,function(i,n){ids.push(n.${table.idColumn.columnNameLower})
 				});
-				$.ajax({
-					url : "<@jspEl 'ctx'/>/${classNameLower}/delete",
-					type : "get",
-					data : {"ids":ids},
-					traditional : true,
-					success : function(data){
-						var result = $.parseJSON(data);
-						if(result.code=="0000"){
-							$.messager.alert('提示', "操作成功！", 'info',function(){
-								$('#queryForm').submit();
-							});
-						}else{
-							$.messager.alert('提示', result.message, 'info');
-						}
-					}
-				});
+				deleteOpt(ids);
 			}else{
 				$.message.alert("请选择后进行删除操作！","warning");
 			}
 		}
 	}
+	function deleteOpt(ids) {
+		$.ajax({
+			url : "<@jspEl 'ctx'/>/${classNameLower}/delete",
+			type : "get",
+			data : {"ids":ids},
+			traditional : true,
+			success : function(data){
+				var result = $.parseJSON(data);
+				if(result.code=="0000"){
+					$.messager.alert('提示', "操作成功！", 'info',function(){
+						$('#queryForm').submit();
+					});
+				}else{
+					$.messager.alert('提示', result.message, 'info');
+				}
+			}
+		});
+	}
+
 	var option = {
 			title:'<%=${className}.TABLE_ALIAS%>',
 			iconCls:'icon-save',
@@ -150,6 +161,11 @@
 					</#if>
 				</#if>
 			</#list>
+					,{field:'action',title:'操作',sortable:false,formatter:function(value,row,index){
+						return '<a href="${ctx}/sysRole/show?id=' + row.id + '">查看</a>&nbsp;' +
+							'<a href="${ctx}/sysRole/edit?id=' + row.id + '">修改</a>&nbsp;' +
+							'<a href="javascript:void(0)" onclick="deleteItem(\'' + row.id + '\')">删除</a>';
+					}}
 			]],
 			pagination:true,//设置为 true，则在数据网格（datagrid）底部显示分页工具栏
 			pageList:[10,20,50,100,200],
