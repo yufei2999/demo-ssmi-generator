@@ -7,6 +7,7 @@ import ${basepackage}.model.${className};
 import java.util.Calendar;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class ${className}Query extends BaseQuery<${className}> {
     
@@ -25,7 +26,9 @@ public class ${className}Query extends BaseQuery<${className}> {
 <#list table.columns as column>
 	/** ${column.columnAlias} */
 	<#if column.isDateTimeColumn && !column.contains("begin,start,end")>
+	@DateTimeFormat(pattern = DATE_FORMAT)
 	private ${column.javaType} ${column.columnNameLower}Begin;
+	@DateTimeFormat(pattern = DATE_FORMAT)
 	private ${column.javaType} ${column.columnNameLower}End;
 	<#else>
 	private ${column.javaType} ${column.columnNameLower};

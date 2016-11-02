@@ -3,6 +3,8 @@ import ${basepackage}.model.*;
 import ${basepackage}.service.*;
 import ${basepackage}.query.*;
 import com.yufei.common.AjaxResult;
+import com.yufei.utils.CommonUtil;
+import com.yufei.utils.DataTypeUtils;
 import com.yufei.utils.JsonUtil;
 import java.util.Arrays;
 import java.util.HashMap;

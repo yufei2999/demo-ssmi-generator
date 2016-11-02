@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class ${className} extends BaseBean {
 
@@ -17,21 +18,24 @@ public class ${className} extends BaseBean {
 	
 	//alias
 	public static final String TABLE_ALIAS = "${table.tableAlias}";
-		<#list table.columns as column>
+<#list table.columns as column>
 	public static final String ALIAS_${column.constantName} = "${column.columnAlias}";
-	</#list>
+</#list>
 	
 	//date formats
-	<#list table.columns as column>
+<#list table.columns as column>
 	<#if column.isDateTimeColumn>
 	public static final String FORMAT_${column.constantName} = DATE_FORMAT;
 	</#if>
-	</#list>
+</#list>
 	
 	//columns START
-	<#list table.columns as column>
+<#list table.columns as column>
+	<#if column.isDateTimeColumn>
+	@DateTimeFormat(pattern = DATE_FORMAT)
+	</#if>
 	private ${column.javaType} ${column.columnNameLower};
-	</#list>
+</#list>
 	//columns END
 
 <@generateConstructor className/>

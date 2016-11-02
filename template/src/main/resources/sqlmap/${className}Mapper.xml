@@ -49,7 +49,7 @@
     <delete id="delete">
         DELETE FROM ${table.sqlName} WHERE id IN
 		<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-			#{item}
+			#${r"{"}item${r"}"}
 		</foreach>
     </delete>
     
