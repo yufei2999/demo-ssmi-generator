@@ -162,8 +162,8 @@
 				</#if>
 			</#list>
 					,{field:'action',title:'操作',sortable:false,formatter:function(value,row,index){
-						return '<a href="${ctx}/sysRole/show?id=' + row.id + '">查看</a>&nbsp;' +
-							'<a href="${ctx}/sysRole/edit?id=' + row.id + '">修改</a>&nbsp;' +
+						return '<a href="<@jspEl 'ctx'/>/${classNameLower}/show?id=' + row.id + '">查看</a>&nbsp;' +
+							'<a href="<@jspEl 'ctx'/>/${classNameLower}/edit?id=' + row.id + '">修改</a>&nbsp;' +
 							'<a href="javascript:void(0)" onclick="deleteItem(\'' + row.id + '\')">删除</a>';
 					}}
 			]],
