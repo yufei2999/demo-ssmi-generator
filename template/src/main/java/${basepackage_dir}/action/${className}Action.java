@@ -9,7 +9,7 @@ package ${basepackage}.action;
 @RequestMapping(value = "/${classNameLower}")
 public class ${className}Action {
 
-    private static final Logger logger = Logger.getLogger(${className}Action.class);
+    private static final Log log = LogFactory.getLog(${className}Action.class);
 
     @Autowired
     private ${className}Service ${classNameLower}Service;
