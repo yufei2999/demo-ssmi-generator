@@ -25,14 +25,14 @@ public class ${className} extends BaseBean {
 	//date formats
 <#list table.columns as column>
 	<#if column.isDateTimeColumn>
-	public static final String FORMAT_${column.constantName} = DATE_TIME_FORMAT;
+	public static final String FORMAT_${column.constantName} = DATE_FORMAT;
 	</#if>
 </#list>
 	
 	//columns START
 <#list table.columns as column>
 	<#if column.isDateTimeColumn>
-	@DateTimeFormat(pattern = DATE_FORMAT)
+	@DateTimeFormat(pattern = DATE_TIME_FORMAT)
 	</#if>
 	private ${column.javaType} ${column.columnNameLower};
 </#list>
