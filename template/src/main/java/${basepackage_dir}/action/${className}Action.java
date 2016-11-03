@@ -26,7 +26,6 @@ public class ${className}Action {
      * 列表查询
      *
      * @param query
-     * @param model
      * @return
      */
     @ResponseBody
