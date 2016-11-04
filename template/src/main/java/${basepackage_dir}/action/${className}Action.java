@@ -37,7 +37,7 @@ public class ${className}Action {
             map.put("total", page.getTotalCount());
             map.put("rows", page.getResult());
         } catch (Exception e) {
-            logger.error("${className}列表查询异常", e);
+            log.error("${className}列表查询异常", e);
         }
         return JsonUtil.toJSONString(map);
     }
@@ -83,7 +83,7 @@ public class ${className}Action {
             } else {
                 result.setMessage("${className}保存异常！");
             }
-            logger.error(result.getMessage(), e);
+            log.error(result.getMessage(), e);
         }
         return JsonUtil.toJSONString(result);
     }
@@ -120,7 +120,7 @@ public class ${className}Action {
             } else {
                 result.setMessage("${className}更新异常！");
             }
-            logger.error(result.getMessage(), e);
+            log.error(result.getMessage(), e);
         }
         return JsonUtil.toJSONString(result);
     }
@@ -147,7 +147,7 @@ public class ${className}Action {
             } else {
             result.setMessage("${className}删除异常！");
             }
-            logger.error(result.getMessage(), e);
+            log.error(result.getMessage(), e);
         }
         return JsonUtil.toJSONString(result);
     }
