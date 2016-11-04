@@ -25,7 +25,7 @@ public class ${className} extends BaseBean {
 	//date formats
 <#list table.columns as column>
 	<#if column.isDateTimeColumn>
-	public static final String FORMAT_${column.constantName} = DATE_FORMAT;
+	public static final String FORMAT_${column.constantName} = DATE_TIME_FORMAT;
 	</#if>
 </#list>
 	

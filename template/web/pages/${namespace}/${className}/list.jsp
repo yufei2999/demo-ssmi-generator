@@ -191,7 +191,7 @@
 		$('#userDataGrid').datagrid(option);
 		//设置底部的上一页和下一页
 		var p = $('#userDataGrid').datagrid('getPager');
-		if (p){
+		if (p) {
 			$(p).pagination({
 				onBeforeRefresh:function(){
 					alert('before refresh');
@@ -199,17 +199,13 @@
 			});
 			$(p).pagination({
 				onSelectPage:function(pageNumber,pageSize){
-					var queryParams = $('#userDataGrid').datagrid('options').queryParams;
-					queryParams.pageNumber=pageNumber;
-					queryParams.pageSize=pageSize;
-					
 					$("input[name='pageNumber']").val(pageNumber);
 					$("input[name='pageSize']").val(pageSize);
 					$('#queryForm').submit();
 				}
 			});
-		}}
-	); //end $(document).ready(handler)
+		}
+	}); //end $(document).ready(handler)
 	//以下这些方法放在这几是为了提供编写javascript参考用，可根据实际情况删除
 	function resize(){
 		$('#userDataGrid').datagrid('resize', {
