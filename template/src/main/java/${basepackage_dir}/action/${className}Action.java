@@ -45,6 +45,8 @@ public class ${className}Action {
     /**
      * 查看对象
      *
+     * @param model
+     * @param id
      * @return
      */
     @RequestMapping(value = "/show")
@@ -66,6 +68,7 @@ public class ${className}Action {
     /**
      * 保存
      *
+     * @param entity
      * @return
      */
     @ResponseBody
@@ -91,6 +94,8 @@ public class ${className}Action {
     /**
      * 进入更新页面
      *
+     * @param model
+     * @param id
      * @return
      */
     @RequestMapping(value = "/edit")
@@ -102,6 +107,7 @@ public class ${className}Action {
     /**
      * 更新
      *
+     * @param entity
      * @return
      */
     @ResponseBody
@@ -128,6 +134,7 @@ public class ${className}Action {
     /**
      * 删除
      *
+     * @param request
      * @return
      */
     @ResponseBody
