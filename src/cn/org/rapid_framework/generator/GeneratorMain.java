@@ -10,6 +10,10 @@ public class GeneratorMain {
         g.deleteOutRootDir();
         //通过数据库表生成文件,template为模板的根目录
         g.generateByTable("sys_func", "template");
+        g.generateByTable("sys_role", "template");
+        g.generateByTable("sys_role_func", "template");
+        g.generateByTable("sys_user", "template");
+        g.generateByTable("sys_user_role", "template");
         //打开文件夹
         Runtime.getRuntime().exec("cmd.exe /c start " + GeneratorProperties.getRequiredProperty("outRoot"));
     }
